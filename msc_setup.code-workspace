@@ -1,0 +1,21 @@
+{
+
+	"folders": [
+		{
+			"path": "."
+		},
+		{
+			"path": "/opt/hfs17.5.391/houdini"
+		}
+	],
+	"settings": {
+		"python.jediEnabled": false,
+		"python.autoComplete.extraPaths": [ "/opt/hfs17.5.391/houdini/python2.7libs" ],
+		"python.autoComplete.preloadModules": ["hou"],
+		"terminal.integrated.env.linux": {
+		"PYTHONPATH" : "/opt/hfs17.5.391/houdini/python2.7libs:/opt/hfs17.5.391/python/bin"
+		}
+
+
+	}
+}
