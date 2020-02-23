@@ -5,6 +5,7 @@ import pprint
 import logging
 import sys
 import psutil
+from ui.utils import show_help
 
 os.environ['NO_PROXY']='127.0.0.1'
 JOPLIN_HOST = 'http://localhost:41184'
@@ -72,67 +73,12 @@ class JoplinClient(requests.Session):
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-def create_note(titel ,body ,file_link, tags):
+def setup():
     """
-    return bool sucess
+    check, if able to connect to the joplin api
+
+    return {url,port,token}
     """
-    
-    url = '{0}/notes/'.format(JOPLIN_HOST)
-    data ={
-            'token':token,
-    }
-
-
-
-
-if __name__ == '__main__':
-
-    # msg for user, when connection failed
-    msg = ''
-
-    #  login data
-    url = ''
-    port = 0
-    tokken = ''
 
     # Get Config data
     try:
@@ -146,11 +92,10 @@ if __name__ == '__main__':
                 logger.info('config file is valid')
 
                 # setup up connection attributes
-                url = config['url']
-                port = config['port']
-                tokken = config['token']
-
-    
+                return {
+                'url':config['url'],
+                'port':config['port'],
+                'token':config['token']}
 
             except requests.exceptions.ConnectionError as e:
                 # get no connection to joplin
@@ -164,17 +109,28 @@ if __name__ == '__main__':
                         break
                 else:
                     logger.debug('joplin NOT running')
-                    msg = 'joplin app is not running\n please start joplin '
+                    show_help('joplin app is not running\n please start joplin ')
 
         else:
             #the config file failed to connect
             logger.error('config not valid')
-            msg = 'in the config.json one of the params is not valid'
+            show_help('in the config.json one of the params is not valid')
             raise KeyError
 
     except EnvironmentError as e:
-        msg = 'cant open or find the config.json file\n'
+        show_help('cant open or find the config.json file\n')
         logger.error('error open config.json file with {0}'.format(e))
+
+
+
+
+
+
+
+
+if __name__ == '__main__':
+    setup()
+
 
 
 
