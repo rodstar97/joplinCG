@@ -106,19 +106,20 @@ def setup():
                 for process in psutil.process_iter():
                     if process.name() == 'joplin':
                         logger.debug('joplin is running')
+                        show_help('joplin app is running\nbut config file is not Valid\nplease check the help file')
                         break
                 else:
                     logger.debug('joplin NOT running')
-                    show_help('joplin app is not running\n please start joplin ')
+                    show_help('joplin app is not running\nplease start joplin ')
 
         else:
             #the config file failed to connect
             logger.error('config not valid')
-            show_help('in the config.json one of the params is not valid')
+            show_help('in the config.json one of the params is not valid\nplease check the help file')
             raise KeyError
 
     except EnvironmentError as e:
-        show_help('cant open or find the config.json file\n')
+        show_help('cant open or find the config.json file\nplease check the help file')
         logger.error('error open config.json file with {0}'.format(e))
 
 

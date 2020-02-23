@@ -20,7 +20,14 @@
    <item>
     <layout class="QVBoxLayout" name="verticalLayout">
      <item>
-      <widget class="QTextBrowser" name="help"/>
+      <widget class="QTextBrowser" name="help">
+       <property name="readOnly">
+        <bool>true</bool>
+       </property>
+       <property name="textInteractionFlags">
+        <set>Qt::LinksAccessibleByMouse|Qt::TextSelectableByKeyboard</set>
+       </property>
+      </widget>
      </item>
     </layout>
    </item>
